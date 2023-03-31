@@ -26,35 +26,36 @@ app.use(express.json()) // чтение json данных
 app.set('json spaces', 2)
 
 // local storage
-const storage = multer.diskStorage({
-  // создание хранилища изображений
-  destination: (_, __, cb) => {
-    if (!fs.existsSync('uploads')) {
-      // путь сохранения изображений
-      fs.mkdirSync('uploads')
-    }
-    cb(null, 'uploads')
-  },
-  filename: (_, file, cb) => {
-    cb(null, file.originalname) // имя сохранённого файла
-  },
-})
+// const storage = multer.diskStorage({
+//   // создание хранилища изображений
+//   destination: (_, __, cb) => {
+//     if (!fs.existsSync('uploads')) {
+//       // путь сохранения изображений
+//       fs.mkdirSync('uploads')
+//     }
+//     cb(null, 'uploads')
+//   },
+//   filename: (_, file, cb) => {
+//     cb(null, file.originalname) // имя сохранённого файла
+//   },
+// })
+// /local storage
 
 // AWS storage
-// const storage = multer.memoryStorage()
+const storage = multer.memoryStorage()
 
-// app.get('/uploads/:key', (req, res) => {
-//   const readStream = getFileStream(req.url)
-//   res.append('Content-Type', 'image/jpeg')
-//   return readStream.pipe(res)
-// })
+app.get('/uploads/:key', (req, res) => {
+  const readStream = getFileStream(req.url)
+  res.append('Content-Type', 'image/jpeg')
+  return readStream.pipe(res)
+})
 // /AWS storage
 
 const upload = multer({ storage }) // соединяем хранилище с multer
 app.post('/upload', checkAuth, upload.single('image'), async (req, res) => {
-  //const result = await s3Storage(req.file) // S3 storage
-  //return res.json({ url: `/uploads/${req.file.originalname}`, result }) // S3 storage
-  return res.json({ url: `/uploads/${req.file.originalname}` }) // local storage
+  const result = await s3Storage(req.file) // S3 storage
+  return res.json({ url: `/uploads/${req.file.originalname}`, result }) // S3 storage
+  //return res.json({ url: `/uploads/${req.file.originalname}` }) // local storage
 })
 
 app.use('/uploads', express.static('uploads'))

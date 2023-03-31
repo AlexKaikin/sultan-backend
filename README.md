@@ -11,8 +11,8 @@
 <ul>
     <li>Язык программирования: TypeScript</li>
     <li>Библиотеки: Reactjs, @reduxjs/toolkit, react-redux, react-router-dom, axios, formik, classnames, sass </li>
-    <li>Ссылка на GitHub: <a href="" target="_blank"></a></li>
+    <li>Ссылка на GitHub: <a href="https://github.com/AlexKaikin/sultan-frontend" target="_blank">https://github.com/AlexKaikin/sultan-frontend</a></li>
 </ul>
 
-<h3>DEMO</h3>
-<a href="" target="_blank"></a>
+<h3>DEMO интернет магазина</h3>
+<a href="https://sultan-fawn.vercel.app/" target="_blank">https://sultan-fawn.vercel.app/</a>
