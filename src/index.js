@@ -6,7 +6,7 @@ import cors from 'cors'
 import * as dotenv from 'dotenv'
 dotenv.config()
 import { checkAuth } from './utils/index.js'
-//import { getFileStream, s3Storage } from './s3Storage.js'
+import { getFileStream, s3Storage } from './s3Storage.js'
 import serverRouter from './routes/servers.js'
 import productRouter from './routes/products.js'
 import authRouter from './routes/auth.js'
